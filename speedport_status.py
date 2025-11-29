@@ -69,7 +69,8 @@ if __name__ == "__main__":
     print(f"Starting DSL monitor - interval: {LOOP_INTERVAL}s")
     while True:
         try:
-            result = get_dsl_info()
+            try: result = get_dsl_info()
+            except: result = {}
             print(result)
             write_to_influx(result)
             print(f"Sleeping for {LOOP_INTERVAL} seconds...")
