@@ -32,7 +32,7 @@ def get_dsl_info():
 
     result = {}
     for item in items:
-        if item.get("vartype") != "value":
+        if item.get("vartype") != "value" and item.get("vartype") != "status":
             continue
         vid = item.get("varid")
         if vid == "dsl_downstream":
