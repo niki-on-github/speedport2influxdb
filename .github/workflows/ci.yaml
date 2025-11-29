@@ -5,10 +5,6 @@ on:
   push:
     tags:
     - "v*.*.*"
-  pull_request:
-    types:
-    - opened
-    - reopened
 
 env:
   REGISTRY_IMAGE: ghcr.io/${{ github.repository }}
