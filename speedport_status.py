@@ -4,13 +4,14 @@ import time
 from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 
-URL = "http://192.168.2.1/data/Status.json"
-
+SPEEDPORT_URL = os.getenv("SPEEDPORT_URL", "http://192.168.2.1")
 INFLUX_URL = os.getenv("INFLUX_URL")
 INFLUX_TOKEN = os.getenv("INFLUX_TOKEN")
 INFLUX_ORG = os.getenv("INFLUX_ORG")
 INFLUX_BUCKET = os.getenv("INFLUX_BUCKET", "speedport")
 LOOP_INTERVAL = int(os.getenv("LOOP_INTERVAL", "3600"))
+
+STATUS_URL = f"{SPEEDPORT_URL}/data/Status.json"
 
 def validate_influx_env():
     """Raise error if required InfluxDB env vars are missing"""
@@ -25,7 +26,7 @@ def validate_influx_env():
         raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
 
 def get_dsl_info():
-    r = requests.get(URL, timeout=5)
+    r = requests.get(STATUS_URL, timeout=5)
     r.raise_for_status()
     items = r.json()
 

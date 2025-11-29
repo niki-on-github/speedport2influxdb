@@ -6,4 +6,4 @@ RUN pip install requests influxdb-client
 
 COPY speedport_status.py .
 
-CMD ["python", "speedport_status.py"]
+CMD ["python", "-u", "speedport_status.py"]
